@@ -1,0 +1,56 @@
+input:
+  #url: '/Users/A200158358/Desktop/5 safe/girlsday/LUMPI_Measurement1/video.mp4' 
+  url: '/Users/A200158358/Desktop/5 safe/girlsday/Beispielbilder_LH/IMG_0098.mov'
+detection:
+  model: 'yolov8s-seg.pt'
+  classes_of_interest: ['person', 'car', 'bicycle', 'motorcycle', 'truck', 'bus']
+bev:
+  top_view: '/Users/A200158358/Desktop/5 safe/girlsday/Beispielbilder_LH/topview.jpg'
+  #homography: '//Users/A200158358/Desktop/5 safe/girlsday/LUMPI_Measurement1/homography_matrix.json'
+  homography: '//Users/A200158358/Desktop/5 safe/girlsday/Beispielbilder_LH/homography_gd/homography_matrix.json'
+  scalefactor: 17.814
+colors:
+  person: [255, 0, 0]
+  bicycle: [0, 255, 0]
+  car: [0, 69, 255]
+  motorcycle: [255, 0, 0]
+  bus: [0, 0, 255]
+  truck: [0, 0, 255]
+dm: 
+  is_used: true
+  not_intended_paths:
+    points:
+      pts_int_path_1: [
+        [2037, 1423],
+        [2098, 1292],
+        [2607, 1668],
+        [2486, 1802]
+      ] 
+    color: [0, 215, 255]
+  turning_right:
+    points:
+      pts_turn_right_zone_1: [
+        [1356, 1301],
+        [1411, 1316],
+        [1331, 885],
+        [1377, 892]
+      ]
+      pts_turn_right_zone_2: [
+        [1460, 772],
+        [1462, 816],
+        [1756, 658],
+        [1773, 690]
+      ]
+      pts_turn_right_zone_3: [
+        [1906, 737],
+        [1976, 715],
+        [2094, 930],
+        [2134, 875]
+      ]
+      pts_turn_right_zone_4: [
+        [2131, 962],
+        [2171, 918],
+        [2357, 1118],
+        [2327, 1017]
+      ]
+    color: [0, 69, 255]
