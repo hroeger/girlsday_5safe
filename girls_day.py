@@ -1,6 +1,10 @@
 from sklearn import svm
 from sklearn.exceptions import NotFittedError
 import pickle
+import requests
+import threading
+import queue
+
 X = [[1,1,0], [1,0,1], [0,1,0],[0,1,1],[1,1,1],[0,0,0],[1,0,0],[0,0,0]]
 y = [1,1,0,0,1,0,0,0]
 
@@ -56,15 +60,63 @@ class GirlsDayModel():
     #  print(clf.predict([v])[0])
         
         # if the model is not trained yet, it will always return 0.
-
-        # now, let's train the model.
         try:
             prediction = self.model.predict([v])[0]
         except NotFittedError:
             prediction = 0
-        return prediction
+        
+        print(prediction)
+        if prediction == 1:
+            return True
+        return False
+
+class GDMessageHandler():
+    on_url= "http://127.0.0.1:5000/api/on"
+    off_url= "http://127.0.0.1:5000/api/off"
+
+    def __init__(self):
+       # self.status_ = False
+        # Create a new thread
+        self.q = queue.Queue()
+        sending_thread = threading.Thread(target=self.await_messages, args=(self.q,), name="sending_thread") 
+        # Start the thread
+        sending_thread.start()
+
+    def await_messages(self,q):
+        status_ = False
+        while True:
+            signal = q.get()
+            if signal is None:
+                break
+            status_ = self.send_message(signal, status_)
+            print (f'current status: {status_}', flush=True)
+
+        # queue die wartet.
+ 
+    def send_message(self, signal, status_):
+        print("if required, sending message " + str(signal), flush=True)
+        if status_ != signal:
+            try:
+                if signal == True:
+                    status_ = True
+                    response = requests.get(self.on_url)
+                else:
+                    status_ = False
+                    response = requests.get(self.off_url)
+                print("Response Status Code:", response.status_code)
+                print("Response Content:", response.text)
+                print(status_)
+            except requests.exceptions.RequestException:
+                print("could not resove url")
+            # Print the response status code and content
+
+        else: 
+            print("no change in status")
+        return status_
 
 
 #test_frame(['person', 'person', 'person', 'person','car'])
 #test_frame(['person', 'person', 'person', 'person'])
 #test_frame(['person', 'person', 'person', 'person','motorcycle'])
+
+
