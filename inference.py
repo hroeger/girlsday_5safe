@@ -7,6 +7,9 @@ from fivesafe.decision_module import decision_making as dm
 from ultralytics import YOLO
 import cv2
 import girls_day
+import argparse
+
+dm_model = "empty_model.pkl"
 
 def start(cap, cfg):
     # Initialization
@@ -32,9 +35,15 @@ def start(cap, cfg):
         dm.draw_polylines_in_top_view(top_view_org, contours_turning_right, color=cfg.dm.turning_right.color)
 
     
-    girls_day_model = girls_day.GirlsDayModel('empty_model.pkl')
+ #   girls_day_model = girls_day.GirlsDayModel('empty_model.pkl')
+    print(f'"initialize dm with model: {dm_model}')
+    girls_day_model = girls_day.GirlsDayModel(dm_model)
     girls_day_messenger = girls_day.GDMessageHandler()
 
+    # start flask server. - no! flask server is a second, different application. then store in model and thats it.
+    # somehow need to refresh the model.
+    
+    
     # Main Loop
     while True:
         top_view = top_view_org.copy()
@@ -48,7 +57,7 @@ def start(cap, cfg):
         # verify against model.
         dangerous_situation = girls_day_model.test_frame(detecion_array)
         print(dangerous_situation, flush=True)
-        girls_day_messenger.q.put(dangerous_situation)
+        girls_day_messenger.q.put(dangerous_situation) #True / False
         # send warnings if necessary
 
         image_tracks = image_tracker.track(detections)
@@ -70,4 +79,11 @@ def start(cap, cfg):
     cv2.destroyAllWindows
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description="Process some integers.")
+    parser.add_argument("dm_model", help="path to model used")
+    args = parser.parse_args()
+    print(args)
+    dm_model = args.dm_model
+
+    print(f'starting with model: {dm_model}')
     run('conf/video_LUMPI.yaml', start, bufferless=False)

@@ -22,16 +22,27 @@ y = [1,1,0,0,1,0,0,0]
 
 # end helper 
 
+
+
 class GirlsDayModel():
+    def train_model(X,y):
+    #X = list of arrays
+    #y = list that is handed over.
+        
+        clf = svm.SVC()
+        clf.fit(X,y)
+        with open('trained_model.pkl','wb') as f:
+            pickle.dump(clf,f)
+
     def __init__(self, path_to_model):
         with open(path_to_model,'rb') as f:
             self.model = pickle.load(f)
         #self.model = svm.SVC()
         
 
-    def train_model(self,X,y):
+   # def train_model(self,X,y):
 
-        self.model.fit(X, y)
+   #    self.model.fit(X, y)
 
     def get_model(self):
         return self.model
