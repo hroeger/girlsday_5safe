@@ -110,10 +110,10 @@ class GDMessageHandler():
             try:
                 if signal == True:
                     status_ = True
-                    response = requests.get(self.on_url)
+                    response = requests.post(self.on_url)
                 else:
                     status_ = False
-                    response = requests.get(self.off_url)
+                    response = requests.post(self.off_url)
                 print("Response Status Code:", response.status_code)
                 print("Response Content:", response.text)
                 print(status_)
