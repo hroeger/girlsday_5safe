@@ -65,7 +65,7 @@ def start(cap, cfg):
      #   world_tracks_vrus, world_tracks_vehicles = world_tracker.track(image_tracks_transformed)
        # top_view = draw_world_positions(top_view, world_tracks_vrus, cfg.colors)
        # top_view = draw_vehicle_baseplates(top_view, world_tracks_vehicles, cfg.bev.scalefactor, cfg.colors, 3)
-        frame = draw_tracks(frame, image_tracks, cfg.colors, draw_detection_id=True)
+        frame = draw_tracks(frame, image_tracks, cfg.colors, draw_detection_id=False)
         # Decision Making
       #  not_intended_path_vrus, turn_right_vrus = dm.get_vrus_in_zones(world_tracks_vrus, contours_int_path, contours_turning_right)
        # top_view = draw_world_positions(top_view, not_intended_path_vrus, cfg.colors, fixed_color=[0, 255, 0])

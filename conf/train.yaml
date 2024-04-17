@@ -6,5 +6,5 @@ val: 'val/images'
 
 #nc: 3
 nc: 2
-names: ['car', 'person', 'bicycle']
+#names: ['car', 'person', 'bicycle']
 names: ['car', 'person']
