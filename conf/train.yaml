@@ -1,0 +1,10 @@
+# Config for Training Yolov8
+#path: '/Users/tobias/ziegleto/data/5Safe/vup/pedestrian_vup/'
+path: '/Users/A200158358/Desktop/5 safe/girlsday/racer_training_annotated'
+train: 'train/images'
+val: 'val/images'
+
+#nc: 3
+nc: 2
+names: ['car', 'person', 'bicycle']
+names: ['car', 'person']
