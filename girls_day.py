@@ -4,6 +4,7 @@ import pickle
 import requests
 import threading
 import queue
+from datetime import datetime
 
 X = [[1,1,0], [1,0,1], [0,1,0],[0,1,1],[1,1,1],[0,0,0],[1,0,0],[0,0,0]]
 y = [1,1,0,0,1,0,0,0]
@@ -31,8 +32,12 @@ class GirlsDayModel():
         
         clf = svm.SVC()
         clf.fit(X,y)
-        with open('trained_model.pkl','wb') as f:
+        current_time = datetime.now()
+        hours = current_time.hour
+        minutes = current_time.minute
+        with open(f'trained_model_{hours}:{minutes}.pkl0','wb') as f:
             pickle.dump(clf,f)
+        return clf, f'trained_model_{hours}:{minutes}.pkl0'
 
     def __init__(self, path_to_model):
         with open(path_to_model,'rb') as f:
@@ -47,10 +52,10 @@ class GirlsDayModel():
     def get_model(self):
         return self.model
 
-    def test_frame(self,input_list): #expects a list of labels.
-        people_count = (input_list.count('person'))
+    def test_frame(self,input_list): #expects a list of labels. [person, person bicyle...]
+        people_count = (input_list.count('bicycle')) #bicycle
         motorcycle_count = input_list.count('motorcycle')
-        car_count = input_list.count('car')
+        car_count = input_list.count('person') # person
 
         people = 0
         motorcycle = 0
@@ -66,8 +71,8 @@ class GirlsDayModel():
             car = 1
 
 
-        v = [people, motorcycle, car] #create vector to test. does it work if count > 0 or not? not really. 
-    #  print(v)
+        v = [people, car] # switch to two dimensionality
+        print(v, flush=True)
     #  print(clf.predict([v])[0])
         
         # if the model is not trained yet, it will always return 0.

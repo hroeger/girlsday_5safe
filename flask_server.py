@@ -58,7 +58,8 @@ def update_model():
 
     print(f'received:{request.get_json()}')
 
-    X = [[1,0,0],[1,1,0], [0,1,0], [1,1,0], [0,0,0],[1,0,0],[1,1,0], [0,1,0], [1,1,0], [0,0,0]]
+    #X = [[1,0,1],[1,0,1], [1,0,1], [1,0,0], [0,0,0],[1,0,0],[0,0,0], [0,0,1], [0,0,1], [0,0,0]]
+    X = [[1,1],[1,1], [1,0], [1,0], [0,0],[0,1],[1,1], [0,1], [0,0], [0,0]] #true, true, false, false, false, false, true, false ,false
     data= request.get_json()
     y_tf = [x['rating'] for x in data]
     print (y_tf)
