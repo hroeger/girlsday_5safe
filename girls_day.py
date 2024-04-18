@@ -105,13 +105,14 @@ class GDMessageHandler():
             if signal is None:
                 break
             status_ = self.send_message(signal, status_)
-            print (f'current status: {status_}', flush=True)
+         #   print (f'current status: {status_}', flush=True)
 
         # queue die wartet.
  
     def send_message(self, signal, status_):
      #   print("if required, sending message " + str(signal), flush=True)
         if status_ != signal:
+            print(f'sending update message: {signal}')
             try:
                 if signal == True:
                     status_ = True
