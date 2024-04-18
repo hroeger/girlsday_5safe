@@ -72,7 +72,7 @@ class GirlsDayModel():
 
 
         v = [people, car] # switch to two dimensionality
-        print(v, flush=True)
+      #  print(v, flush=True)
     #  print(clf.predict([v])[0])
         
         # if the model is not trained yet, it will always return 0.
@@ -81,7 +81,7 @@ class GirlsDayModel():
         except NotFittedError:
             prediction = 0
         
-        print(prediction)
+     #   print(prediction)
         if prediction == 1:
             return True
         return False
@@ -110,7 +110,7 @@ class GDMessageHandler():
         # queue die wartet.
  
     def send_message(self, signal, status_):
-        print("if required, sending message " + str(signal), flush=True)
+     #   print("if required, sending message " + str(signal), flush=True)
         if status_ != signal:
             try:
                 if signal == True:
@@ -126,8 +126,8 @@ class GDMessageHandler():
                 print("could not resove url")
             # Print the response status code and content
 
-        else: 
-            print("no change in status")
+     #   else: 
+     #       print("no change in status")
         return status_
 
 

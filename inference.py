@@ -48,7 +48,7 @@ def start(cap, cfg):
     while True:
         top_view = top_view_org.copy()
         detections = detector.detect(frame)
-        print(detections, flush=True)
+     #   print(detections, flush=True)
 
         #detections ist eine list von "detection" objekten
 
@@ -56,7 +56,7 @@ def start(cap, cfg):
 
         # verify against model.
         dangerous_situation = girls_day_model.test_frame(detecion_array)
-        print(dangerous_situation, flush=True)
+      #  print(dangerous_situation, flush=True)
         girls_day_messenger.q.put(dangerous_situation) #True / False
         # send warnings if necessary
 
