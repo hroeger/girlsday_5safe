@@ -2,7 +2,9 @@ from girls_day import GirlsDayModel
 import pickle
 
 X = [[1,1],[1,1], [1,0], [1,0], [0,0],[0,1],[1,1], [0,1], [0,0], [0,0]] #true, true, false, false, false, false, true, false ,false
+X = [[1,1],[0,0], [1,0], [1,1], [1,1],[0,1],[1,0], [1,1], [0,1], [1,1]]
 y = [1,1,1,0,0,0,0,1,0,0]
+y=[1,0,0,1,1,0,0,1,0,1]
 
 clf, path =GirlsDayModel.train_model(X,y)
 

@@ -59,7 +59,7 @@ def update_model():
     print(f'received:{request.get_json()}')
 
     #X = [[1,0,1],[1,0,1], [1,0,1], [1,0,0], [0,0,0],[1,0,0],[0,0,0], [0,0,1], [0,0,1], [0,0,0]]
-    X = [[1,1],[1,1], [1,0], [1,0], [0,0],[0,1],[1,1], [0,1], [0,0], [0,0]] #true, true, false, false, false, false, true, false ,false
+    X = [[1,1],[0,0], [1,0], [1,1], [1,1],[0,1],[1,0], [1,1], [0,1], [1,1]] #true, true, false, false, false, false, true, false ,false
     data= request.get_json()
     y_tf = [x['rating'] for x in data]
     print (y_tf)
@@ -70,27 +70,6 @@ def update_model():
 
     GirlsDayModel.train_model(X,y)
     return ("hello world")
-
-#re-train the model
-@app.route('/model', methods=['GET', 'POST'])
-def example():
-
-    # parse output
-    # use it as input to scikit together with knowledge about images.
-    # train model and store it.
-    response_object = {'status': 'success'}
-    if request.method == 'POST':
-        post_data = request.get_json()
-        BOOKS.append({
-            'title': post_data.get('title'),
-            'author': post_data.get('author'),
-            'read': post_data.get('read')
-        })
-        response_object['message'] = 'Book added!'
-    else:
-        response_object['books'] = BOOKS
-    return jsonify(response_object)
-
 
 
 # Run the Flask app
